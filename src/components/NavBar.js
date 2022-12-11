@@ -1,10 +1,13 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Route } from 'react-router-dom'
+import Register from './authentication/Register'
+
+import Home from './Home'
 
 const NavBar = (props) => {
   return (
     <div>
-        { !localStorage.getItem('token') ? (
+        { localStorage.getItem('token') ? (
                 <div>
                     <Link to="/user/services"><span>Services</span></Link>
                     <Link to="/user/account"><span>Account</span></Link>
@@ -18,6 +21,9 @@ const NavBar = (props) => {
                 </div>
             )
         }
+
+        <Route path="/home" component={Home} exact/>
+        <Route path="/user/register" component={Register} exact/>
     </div>
   )
 }
