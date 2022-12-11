@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import {Link} from 'react-router-dom'
 
 import { isEmail, isMobilePhone } from 'validator'
 
@@ -146,6 +147,7 @@ const Register = () => {
                 value="Register"
             />
         </form>
+        <p>Already a user? <Link to="/user/login">Login</Link></p>
     </div>
   )
 }
