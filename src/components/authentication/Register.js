@@ -1,9 +1,12 @@
 import React, {useState} from 'react'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
 import { isEmail, isMobilePhone } from 'validator'
 
-const Register = () => {
+import { startRegisterUser } from '../../actions/userActions'
+
+const Register = (props) => {
     const [fullName, setFullName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -13,6 +16,8 @@ const Register = () => {
     const [formErrors, setFormErrors] = useState({})
 
     const errors = {}
+
+    const dispatch = useDispatch()
 
     const handleChange = (e) => {
         const name = e.target.name
@@ -77,7 +82,15 @@ const Register = () => {
                 email, password, mobile,
                 role : professional ? 'professional' : 'customer'
             }
-            console.log(formData)
+            const clearAndRedirect = () => {
+                setEmail('')
+                setPassword('')
+                setPassword2('')
+                setMobile('')
+                setProfessional(false)
+                props.history.push('/user/login')
+            }
+            dispatch(startRegisterUser(formData, clearAndRedirect))
         } else {
             setFormErrors(errors)
         }
