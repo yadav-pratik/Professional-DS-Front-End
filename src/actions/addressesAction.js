@@ -21,3 +21,25 @@ const setAddresses = (data) => {
         payload : data
     }
 }
+
+export const startDeleteAddress = (_id) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.delete(`http://localhost:3300/api/address/delete/${_id}`, {
+                headers : {
+                    authorization : localStorage.getItem('token')
+                }
+            })
+            dispatch(removeAddress(data._id))
+        } catch (error) {
+            alert(error)
+        }
+    }
+}
+
+const removeAddress = (id) => {
+    return {
+        type : 'REMOVE_ADDRESS',
+        payload : id
+    }
+}
