@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch} from 'react-redux'
+
+import { startGetAddresses } from '../actions/addressesAction'
 
 import AddressItem from './AddressItem'
 
@@ -10,6 +12,10 @@ const Addresses = (props) => {
   const { addresses } = useSelector((state)=> {
     return state
   })
+
+  useEffect(()=>{
+    dispatch(startGetAddresses())
+  },[])
 
   return (
     <div>
