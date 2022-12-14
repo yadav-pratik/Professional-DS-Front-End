@@ -24,9 +24,9 @@ const NavBar = (props) => {
             )
         }
 
-        <Route path="/home" component={Home} exact/>
+        {/* <Route path="/home" component={Home} exact/>
         <Route path="/user/register" component={Register} exact/>
-        <Route path="/user/login" component={Login} exact/>
+        <Route path="/user/login" component={Login} exact/> */}
     </div>
   )
 }
