@@ -34,7 +34,7 @@ export const startLoginUser = (formData, clearAndRedirect) => {
                     const result = response.data
                     if(result.hasOwnProperty('loginCount')){
                         if(result.loginCount === 1) {
-                            clearAndRedirect('settings')
+                            clearAndRedirect('addresses')
                         } else {
                             clearAndRedirect('services')
                         }

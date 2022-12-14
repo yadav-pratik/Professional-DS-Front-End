@@ -7,8 +7,8 @@ const NavBar = (props) => {
         { localStorage.getItem('token') ? (
                 <div>
                     <Link to="/user/services"><span>Services</span></Link>
-                    <Link to="/user/account"><span>Account</span></Link>
-                    <Link to="/user/settings"><span>Settings</span></Link>
+                    <Link to="/user/profile"><span>Profile</span></Link>
+                    <Link to="/user/addresses"><span>Addresses</span></Link>
                 </div>
             ) : (
                 <div>
