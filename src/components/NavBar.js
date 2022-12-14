@@ -1,10 +1,5 @@
 import React from 'react'
-import { Link, Route } from 'react-router-dom'
-
-import Register from './authentication/Register'
-import Login from './authentication/Login'
-
-import Home from './Home'
+import { Link } from 'react-router-dom'
 
 const NavBar = (props) => {
   return (
@@ -23,10 +18,6 @@ const NavBar = (props) => {
                 </div>
             )
         }
-
-        {/* <Route path="/home" component={Home} exact/>
-        <Route path="/user/register" component={Register} exact/>
-        <Route path="/user/login" component={Login} exact/> */}
     </div>
   )
 }
