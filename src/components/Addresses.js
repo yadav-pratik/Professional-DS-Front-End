@@ -20,12 +20,14 @@ const Addresses = (props) => {
   return (
     <div>
         <h2>Your Addresses - {addresses.length}</h2>
-        {addresses.map( address => {
-          return <AddressItem 
-            key = {address._id}
-            {...address}
-          />
-        })}
+        <form>
+          {addresses.map( address => {
+            return <AddressItem 
+              key = {address._id}
+              {...address}
+            />
+          })}
+        </form>
     </div>
   )
 }
