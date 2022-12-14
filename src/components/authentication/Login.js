@@ -1,6 +1,9 @@
 import React, {useState} from 'react'
 import { isEmail } from 'validator'
 import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+
+import { startLoginUser } from '../../actions/userActions'
 
 
 const Login = (props) => {
@@ -9,6 +12,8 @@ const Login = (props) => {
     const [formErrors, setFormErrors] = useState({})
 
     const errors = {}
+
+    const dispatch = useDispatch()
 
     const handleChange = (e) => {
         const name = e.target.name
@@ -43,7 +48,13 @@ const Login = (props) => {
             const formData = {
                 email, password
             }
-            console.log(formData)
+
+            const clearAndRedirect = (target) => {
+                setEmail('')
+                setPassword('')
+                props.history.push(`/user/${target}`)
+            }
+            dispatch(startLoginUser(formData, clearAndRedirect))
         } else {
             setFormErrors(errors)
         }
