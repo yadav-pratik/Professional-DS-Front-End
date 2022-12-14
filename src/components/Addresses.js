@@ -1,6 +1,8 @@
 import React from 'react'
 import { useSelector, useDispatch} from 'react-redux'
 
+import AddressItem from './AddressItem'
+
 const Addresses = (props) => {
 
   const dispatch = useDispatch()
@@ -13,8 +15,10 @@ const Addresses = (props) => {
     <div>
         <h2>Your Addresses - {addresses.length}</h2>
         {addresses.map( address => {
-          return <div>
-          </div>
+          return <AddressItem 
+            key = {address._id}
+            {...address}
+          />
         })}
     </div>
   )
