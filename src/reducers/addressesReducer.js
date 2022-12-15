@@ -10,6 +10,9 @@ const addressesReducer = (state = initialAddressesValue, action) => {
                 return address._id !== action.payload
             })
         }
+        case 'ADD_ADDRESS' : {
+            return [...state, {...action.payload}]
+        }
         default : {
             return [...state]
         }

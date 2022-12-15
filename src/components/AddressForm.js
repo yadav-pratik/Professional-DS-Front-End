@@ -8,7 +8,8 @@ const AddressForm = (props) => {
             pincode : pin , 
             city : cityName, 
             state : stateName, 
-            handleToggle
+            handleToggle,
+            formSubmit
         } = props
 
     const [doorNumber, setDoorNumber] = useState(dNo ? dNo : '')
@@ -29,17 +30,17 @@ const AddressForm = (props) => {
         if(name === 'doorNumber'){
             setDoorNumber(e.target.value.trim())
         } else  if(name === 'landmark'){
-            setLandmark(e.target.value.trim())
+            setLandmark(e.target.value)
         } else  if(name === 'area'){
-            setArea(e.target.value.trim())
+            setArea(e.target.value)
         } else  if(name === 'street'){
-            setStreet(e.target.value.trim())
+            setStreet(e.target.value)
         } else  if(name === 'pincode'){
             setPincode(e.target.value.trim())
         } else  if(name === 'city'){
-            setCity(e.target.value.trim())
+            setCity(e.target.value)
         } else  if(name === 'state'){
-            setState(e.target.value.trim())
+            setState(e.target.value)
         } 
     }
 
@@ -65,15 +66,15 @@ const AddressForm = (props) => {
 
             const formData = {
                 doorNumber,
-                landmark,
-                area,
-                street,
-                city,
-                state,
+                landmark : landmark.trim(),
+                area : area.trim(),
+                street : street.trim(),
+                city : city.trim(),
+                state : state.trim(),
                 pincode
             }
 
-            console.log(formData)
+            formSubmit(formData)
         } else {
             setFormErrors(errors)
         }

@@ -43,3 +43,32 @@ const removeAddress = (id) => {
         payload : id
     }
 }
+
+export const startCreateAddress = (formData) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.post('http://localhost:3300/api/address/create', formData, {
+                headers : {
+                    authorization : localStorage.getItem('token')
+                }
+            })
+            if(data.hasOwnProperty('notice')){
+                alert(data.notice)
+            } else if(data.hasOwnProperty('errors') || data.hasOwnProperty('message')){
+                alert(data.message)
+            } else {
+                alert("Address Added Successfully!")
+                dispatch(addAddress(data))
+            }
+        } catch (error) {
+            alert(error)
+        }
+    }
+}
+
+const addAddress = (data) => {
+    return {
+        type : 'ADD_ADDRESS',
+        payload : data
+    }
+}

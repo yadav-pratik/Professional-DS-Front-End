@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch} from 'react-redux'
 
-import { startGetAddresses } from '../actions/addressesAction'
-import AddressForm from './AddressForm'
+import { startGetAddresses, startCreateAddress } from '../actions/addressesAction'
 
+import AddressForm from './AddressForm'
 import AddressItem from './AddressItem'
 
 const Addresses = (props) => {
@@ -16,10 +16,14 @@ const Addresses = (props) => {
 
   useEffect(()=>{
     dispatch(startGetAddresses())
-  },[])
+  },[dispatch])
 
   const handleSubmit = (e) => {
     e.preventDefault()
+  }
+
+  const formSubmit = (formData) => {
+    dispatch(startCreateAddress(formData))
   }
 
   return (
@@ -33,7 +37,9 @@ const Addresses = (props) => {
             />
           })}
         </form>
-      <AddressForm />
+      <AddressForm 
+        formSubmit={formSubmit}
+      />
     </div>
   )
 }
