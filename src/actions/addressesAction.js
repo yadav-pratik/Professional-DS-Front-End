@@ -8,7 +8,13 @@ export const startGetAddresses = () => {
                     authorization : localStorage.getItem('token')
                 }
             })
-            dispatch(setAddresses(data))
+            if(data.hasOwnProperty('notice')){
+                alert(data.notice)
+            } else if(data.hasOwnProperty('message')){
+                alert(data.message)
+            } else {
+                dispatch(setAddresses(data))
+            }
         } catch (error) {
             alert(error)
         }
