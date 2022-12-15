@@ -103,3 +103,25 @@ const updateAddress = (data) => {
         payload : data
     }
 }
+
+export const startDefaultAddress = (id) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.put(`http://localhost:3300/api/address/default/${id}`, {} , {
+                headers : {
+                    authorization : localStorage.getItem('token')
+                }
+            })
+            if(data.hasOwnProperty('notice')){
+                alert(data.notice)
+            } else if(data.hasOwnProperty('message')){
+                alert(data.message)
+            } else {
+                alert("Default Address Changed")
+                dispatch(setAddresses(data))
+            }
+        } catch (error) {
+            alert(error)
+        }
+    }
+}

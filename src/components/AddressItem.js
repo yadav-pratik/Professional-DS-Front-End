@@ -1,11 +1,11 @@
 import React, {useState} from 'react'
 import { useDispatch } from 'react-redux'
 
-import { startDeleteAddress, startUpdateAddress } from '../actions/addressesAction'
+import { startDeleteAddress, startUpdateAddress, startDefaultAddress } from '../actions/addressesAction'
 import AddressForm from './AddressForm'
 
 const AddressItem = (props) => {
-    const {_id, doorNumber, landmark, area, street, city, state, pincode} = props
+    const {_id, doorNumber, landmark, area, street, city, state, pincode, defaultAddress} = props
 
     const [toggle, setToggle] = useState(false)
 
@@ -19,6 +19,10 @@ const AddressItem = (props) => {
       setToggle(!toggle)
     }
 
+    const handleDefaultChange = () => {
+      dispatch(startDefaultAddress(_id))
+    }
+
     const formSubmit = (formData, clearForm, _id) => {
       dispatch(startUpdateAddress(formData, clearForm, _id))
     }
@@ -27,7 +31,12 @@ const AddressItem = (props) => {
     <div>
       {!toggle ? (
           <div>
-          <input type="radio" name='default'/>
+          <input 
+            type="radio" 
+            name='default'
+            checked={defaultAddress} 
+            onChange={handleDefaultChange}
+          />
           <span>
             {doorNumber + ', '}
             {landmark && landmark + ', '}
