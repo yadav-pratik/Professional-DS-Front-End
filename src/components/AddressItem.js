@@ -52,6 +52,7 @@ const AddressItem = (props) => {
               state={state}
               pincode={pincode}
               handleToggle={handleToggle}
+              formSubmit={formSubmit}
             />
             <button onClick={handleToggle}>cancel</button>
           </div>

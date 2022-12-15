@@ -13,6 +13,15 @@ const addressesReducer = (state = initialAddressesValue, action) => {
         case 'ADD_ADDRESS' : {
             return [...state, {...action.payload}]
         }
+        case 'UPDATE_ADDRESS' : {
+            return state.map(address => {
+                if(address._id === action.payload._id){
+                    return {...address, ...action.payload}
+                } else {
+                    return {...address}
+                }
+            })
+        }
         default : {
             return [...state]
         }

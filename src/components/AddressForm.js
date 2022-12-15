@@ -84,6 +84,9 @@ const AddressForm = (props) => {
                 setCity('')
                 setState('')
                 setPincode('')
+                if(handleToggle){
+                    handleToggle()
+                }
             }
 
             formSubmit(formData, clearForm, _id)

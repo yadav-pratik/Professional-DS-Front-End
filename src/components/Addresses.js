@@ -18,10 +18,6 @@ const Addresses = (props) => {
     dispatch(startGetAddresses())
   },[dispatch])
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-  }
-
   const formSubmit = (formData, clearForm) => {
     dispatch(startCreateAddress(formData, clearForm))
   }
@@ -29,14 +25,12 @@ const Addresses = (props) => {
   return (
     <div>
       <h2>Your Addresses - {addresses.length}</h2>
-        <form onSubmit = {handleSubmit}>
-          {addresses.map( address => {
-            return <AddressItem 
-              key = {address._id}
-              {...address}
-            />
-          })}
-        </form>
+      {addresses.map( address => {
+        return <AddressItem 
+          key = {address._id}
+          {...address}
+        />
+      })}
       <AddressForm 
         formSubmit={formSubmit}
       />

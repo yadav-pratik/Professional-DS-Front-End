@@ -82,9 +82,24 @@ export const startUpdateAddress = (formData, clearForm, _id) => {
                     authorization : localStorage.getItem('token')
                 }
             })
-            console.log(data)
+            if(data.hasOwnProperty('notice')){
+                alert(data.notice)
+            } else if(data.hasOwnProperty('errors') || data.hasOwnProperty('message')){
+                alert(data.message)
+            } else {
+                alert('Address Updated Successfully!')
+                clearForm()
+                dispatch(updateAddress(data))
+            }
         } catch (error) {
             alert(error)
         }
+    }
+}
+
+const updateAddress = (data) => {
+    return {
+        type : 'UPDATE_ADDRESS',
+        payload : data
     }
 }
