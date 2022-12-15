@@ -27,19 +27,19 @@ const AddressForm = (props) => {
     const handleChange = (e) => {
         const name = e.target.name
         if(name === 'doorNumber'){
-            setDoorNumber(e.target.value)
+            setDoorNumber(e.target.value.trim())
         } else  if(name === 'landmark'){
-            setLandmark(e.target.value)
+            setLandmark(e.target.value.trim())
         } else  if(name === 'area'){
-            setArea(e.target.value)
+            setArea(e.target.value.trim())
         } else  if(name === 'street'){
-            setStreet(e.target.value)
+            setStreet(e.target.value.trim())
         } else  if(name === 'pincode'){
-            setPincode(e.target.value)
+            setPincode(e.target.value.trim())
         } else  if(name === 'city'){
-            setCity(e.target.value)
+            setCity(e.target.value.trim())
         } else  if(name === 'state'){
-            setState(e.target.value)
+            setState(e.target.value.trim())
         } 
     }
 
@@ -49,7 +49,9 @@ const AddressForm = (props) => {
                 || pincode.length ===0
                     || city.length === 0
                         || state.length === 0) {
-            errors.required = "* fields are required"
+            errors.field = "* fields are required"
+        } else if(pincode.length > 6 || pincode.length < 6) {
+            errors.field = "Invalid Pincode"
         }
     }
 
@@ -58,9 +60,7 @@ const AddressForm = (props) => {
 
         runValidations()
 
-        if(errors.hasOwnProperty('required')){
-            setFormErrors(errors)
-        } else {
+        if(Object.keys(errors).length === 0){
             setFormErrors({})
 
             const formData = {
@@ -74,6 +74,8 @@ const AddressForm = (props) => {
             }
 
             console.log(formData)
+        } else {
+            setFormErrors(errors)
         }
     }
     return (
@@ -134,7 +136,7 @@ const AddressForm = (props) => {
                     placeholder="Enter State..."
                 />
                 <span style={redFontColor}>*</span>
-                <p style={redFontColor}>{formErrors.required && formErrors.required}</p>
+                <p style={redFontColor}>{formErrors.field && formErrors.field}</p>
                 <input 
                     type="submit"
                     value="Save Address"
