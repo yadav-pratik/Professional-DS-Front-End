@@ -74,7 +74,17 @@ const AddressForm = (props) => {
                 pincode
             }
 
-            formSubmit(formData)
+            const clearForm = () => {
+                setDoorNumber('')
+                setLandmark('')
+                setArea('')
+                setStreet('')
+                setCity('')
+                setState('')
+                setPincode('')
+            }
+
+            formSubmit(formData, clearForm)
         } else {
             setFormErrors(errors)
         }

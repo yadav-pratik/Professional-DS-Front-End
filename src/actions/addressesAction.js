@@ -44,7 +44,7 @@ const removeAddress = (id) => {
     }
 }
 
-export const startCreateAddress = (formData) => {
+export const startCreateAddress = (formData, clearForm) => {
     return async (dispatch) => {
         try {
             const { data } = await axios.post('http://localhost:3300/api/address/create', formData, {
@@ -58,6 +58,7 @@ export const startCreateAddress = (formData) => {
                 alert(data.message)
             } else {
                 alert("Address Added Successfully!")
+                clearForm()
                 dispatch(addAddress(data))
             }
         } catch (error) {

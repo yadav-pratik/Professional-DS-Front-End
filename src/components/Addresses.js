@@ -22,8 +22,8 @@ const Addresses = (props) => {
     e.preventDefault()
   }
 
-  const formSubmit = (formData) => {
-    dispatch(startCreateAddress(formData))
+  const formSubmit = (formData, clearForm) => {
+    dispatch(startCreateAddress(formData, clearForm))
   }
 
   return (
