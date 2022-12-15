@@ -73,3 +73,18 @@ const addAddress = (data) => {
         payload : data
     }
 }
+
+export const startUpdateAddress = (formData, clearForm, _id) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.put(`http://localhost:3300/api/address/update/${_id}`, formData, {
+                headers : {
+                    authorization : localStorage.getItem('token')
+                }
+            })
+            console.log(data)
+        } catch (error) {
+            alert(error)
+        }
+    }
+}

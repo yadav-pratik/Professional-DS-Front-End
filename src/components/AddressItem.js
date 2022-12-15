@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { useDispatch } from 'react-redux'
 
-import { startDeleteAddress } from '../actions/addressesAction'
+import { startDeleteAddress, startUpdateAddress } from '../actions/addressesAction'
 import AddressForm from './AddressForm'
 
 const AddressItem = (props) => {
@@ -17,6 +17,10 @@ const AddressItem = (props) => {
 
     const handleToggle = () => {
       setToggle(!toggle)
+    }
+
+    const formSubmit = (formData, clearForm, _id) => {
+      dispatch(startUpdateAddress(formData, clearForm, _id))
     }
 
   return (
@@ -39,6 +43,7 @@ const AddressItem = (props) => {
         ) : (
           <div>
             <AddressForm 
+              _id={_id}
               doorNumber={doorNumber}
               landmark={landmark}
               area={area}
