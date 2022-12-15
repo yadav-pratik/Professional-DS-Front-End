@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch} from 'react-redux'
 
 import { startGetAddresses } from '../actions/addressesAction'
+import AddressForm from './AddressForm'
 
 import AddressItem from './AddressItem'
 
@@ -23,7 +24,7 @@ const Addresses = (props) => {
 
   return (
     <div>
-        <h2>Your Addresses - {addresses.length}</h2>
+      <h2>Your Addresses - {addresses.length}</h2>
         <form onSubmit = {handleSubmit}>
           {addresses.map( address => {
             return <AddressItem 
@@ -32,6 +33,7 @@ const Addresses = (props) => {
             />
           })}
         </form>
+      <AddressForm />
     </div>
   )
 }
