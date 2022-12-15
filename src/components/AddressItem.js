@@ -7,12 +7,16 @@ import AddressForm from './AddressForm'
 const AddressItem = (props) => {
     const {_id, doorNumber, landmark, area, street, city, state, pincode} = props
 
-    const [toggle, handleToggle] = useState(false)
+    const [toggle, setToggle] = useState(false)
 
     const dispatch = useDispatch()
 
     const handleDelete = () => {
       dispatch(startDeleteAddress(_id))
+    }
+
+    const handleToggle = () => {
+      setToggle(!toggle)
     }
 
   return (
@@ -29,13 +33,22 @@ const AddressItem = (props) => {
             {state + ' - '}
             {pincode}
           </span>
-          <button >Edit</button>
+          <button onClick={handleToggle}>Edit</button>
           <button onClick={handleDelete}>Delete</button>
         </div>
         ) : (
           <div>
-            <AddressForm />
-            <button>cancel</button>
+            <AddressForm 
+              doorNumber={doorNumber}
+              landmark={landmark}
+              area={area}
+              street={street}
+              city={city}
+              state={state}
+              pincode={pincode}
+              handleToggle={handleToggle}
+            />
+            <button onClick={handleToggle}>cancel</button>
           </div>
         )
       }

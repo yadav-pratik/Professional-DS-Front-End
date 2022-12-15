@@ -1,13 +1,23 @@
 import React, { useState } from "react"
 
 const AddressForm = (props) => {
-    const [doorNumber, setDoorNumber] = useState('')
-    const [landmark, setLandmark] = useState('')
-    const [area, setArea] = useState('')
-    const [street, setStreet] = useState('')
-    const [pincode, setPincode] = useState('')
-    const [city, setCity] = useState('')
-    const [state, setState] = useState('')
+    const { doorNumber : dNo,
+            landmark : lMark, 
+            area : areaName , 
+            street : str, 
+            pincode : pin , 
+            city : cityName, 
+            state : stateName, 
+            handleToggle
+        } = props
+
+    const [doorNumber, setDoorNumber] = useState(dNo ? dNo : '')
+    const [landmark, setLandmark] = useState(lMark ? lMark : '')
+    const [area, setArea] = useState(areaName ? areaName : '')
+    const [street, setStreet] = useState(str ? str : '')
+    const [pincode, setPincode] = useState(pin ? pin : '')
+    const [city, setCity] = useState(cityName ? cityName : '')
+    const [state, setState] = useState(stateName ? stateName : '')
     const [formErrors, setFormErrors] = useState({})
 
     const errors = {}
@@ -127,7 +137,7 @@ const AddressForm = (props) => {
                 <p style={redFontColor}>{formErrors.required && formErrors.required}</p>
                 <input 
                     type="submit"
-                    value="Add Address"
+                    value="Save Address"
                 />
             </form>
         </div>
