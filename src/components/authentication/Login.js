@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 import { startLoginUser } from '../../actions/userActions'
+import { toggleIsLogged } from '../../actions/isLoggedAction'
 
 
 const Login = (props) => {
@@ -52,6 +53,7 @@ const Login = (props) => {
             const clearAndRedirect = (target) => {
                 setEmail('')
                 setPassword('')
+                dispatch(toggleIsLogged())
                 props.history.push(`/user/${target}`)
             }
             dispatch(startLoginUser(formData, clearAndRedirect))

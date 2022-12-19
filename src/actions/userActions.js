@@ -19,7 +19,7 @@ export const startRegisterUser = (formData, clearAndRedirect) => {
 }
 
 export const startLoginUser = (formData, clearAndRedirect) => {
-    return async () => {
+    return async (dispatch) => {
         try {
             const { data } = await axios.post('http://localhost:3300/api/user/login', formData)
             if(data.hasOwnProperty('success')){
