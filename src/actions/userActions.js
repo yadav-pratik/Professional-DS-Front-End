@@ -26,7 +26,7 @@ export const startLoginUser = (formData, clearAndRedirect) => {
                 localStorage.setItem('token', data.token)
                 alert(data.success)
                 try {
-                    const response = await axios.get('http://localhost:3300/api/user/loginCount', {
+                    const response = await axios.get('http://localhost:3300/api/user/login-count', {
                         headers : {
                             authorization : data.token
                         }
@@ -50,5 +50,31 @@ export const startLoginUser = (formData, clearAndRedirect) => {
         } catch (error) {
             alert(error)
         }
+    }
+}
+
+export const startGetUser = () => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.get('http://localhost:3300/api/user/account', {
+                headers : {
+                    authorization : localStorage.getItem('token')
+                }
+            })
+            if(data.hasOwnProperty('message')){
+                alert(data.message)
+            } else {
+                dispatch(setUser(data))
+            }
+        } catch (error) {
+            alert(error)
+        }
+    }
+}
+
+const setUser = (data) => {
+    return {
+        type : 'SET_USER',
+        payload : data
     }
 }
