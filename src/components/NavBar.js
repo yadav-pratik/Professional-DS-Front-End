@@ -10,6 +10,7 @@ const NavBar = (props) => {
         return state
     })
     const handleLogout = () => {
+        localStorage.removeItem('token')
         dispatch(toggleIsLogged())
     }
   return (
