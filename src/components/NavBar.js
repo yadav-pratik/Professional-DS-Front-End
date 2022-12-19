@@ -1,13 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { toggleIsLogged } from '../actions/isLoggedAction'
 
 const NavBar = (props) => {
+    const dispatch = useDispatch()
 
     const { isLogged } = useSelector((state) => {
         return state
     })
-    console.log(isLogged)
+    const handleLogout = () => {
+        dispatch(toggleIsLogged())
+    }
   return (
     <div>
         { isLogged ? (
@@ -15,7 +19,7 @@ const NavBar = (props) => {
                     <Link to="/user/services"><span>Services</span></Link>
                     <Link to="/user/profile"><span>Profile</span></Link>
                     <Link to="/user/addresses"><span>Addresses</span></Link>
-                    <button>Logout</button>
+                    <button onClick={handleLogout}>Logout</button>
                 </div>
             ) : (
                 <div>
