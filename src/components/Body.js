@@ -5,6 +5,7 @@ import Register from './authentication/Register'
 import Login from './authentication/Login'
 import Home from './Home'
 import Addresses from './Addresses'
+import Services from './Services'
 
 const Body = () => {
   return (
@@ -13,6 +14,7 @@ const Body = () => {
         <Route path="/user/register" component={Register} exact/>
         <Route path="/user/login" component={Login} exact/>
         <Route path="/user/addresses" component={Addresses} exact/>
+        <Route path="/user/services" component={Services} />
     </div>
   )
 }
