@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { useDispatch } from 'react-redux'
 
-import { startDeleteAddress, startUpdateAddress, startDefaultAddress } from '../actions/addressesAction'
+import { startDeleteAddress, startUpdateAddress, startDefaultAddress } from '../../actions/addressesAction'
 import AddressForm from './AddressForm'
 
 const AddressItem = (props) => {

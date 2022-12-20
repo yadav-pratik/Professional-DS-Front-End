@@ -8,7 +8,8 @@ const Services = (props) => {
             <span><Link to="/user/services/add-request">Add Service Request</Link></span>
             <span><Link to="/user/services/past-requests">Your Past Requests</Link></span>
 
-
+            {/* <Route path="/user/services/add-request" component={AddRequest} />
+            <Route path="/user/services/past-requests" component={PastRequests} /> */}
         </div>
     )
 }

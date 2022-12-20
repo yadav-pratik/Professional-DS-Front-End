@@ -4,8 +4,8 @@ import { Route } from 'react-router-dom'
 import Register from './authentication/Register'
 import Login from './authentication/Login'
 import Home from './Home'
-import Addresses from './Addresses'
-import Services from './Services'
+import Addresses from './address/Addresses'
+import Services from './service/Services'
 
 const Body = () => {
   return (

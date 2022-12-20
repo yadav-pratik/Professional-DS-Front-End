@@ -2,8 +2,8 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch} from 'react-redux'
 import swal from 'sweetalert'
 
-import { startGetAddresses, startCreateAddress } from '../actions/addressesAction'
-import { startGetUser } from '../actions/userActions'
+import { startGetAddresses, startCreateAddress } from '../../actions/addressesAction'
+import { startGetUser } from '../../actions/userActions'
 
 import AddressForm from './AddressForm'
 import AddressItem from './AddressItem'
