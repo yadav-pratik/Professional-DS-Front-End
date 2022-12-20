@@ -20,14 +20,16 @@ const Addresses = (props) => {
     return state
   })
 
-user.loginCount === 1 &&  swal({
-  title:"Welcome Aboard User!",
-  text: user.role === 'customer' ? (
-      "Add your first Address and start posting Service Requests"
-    ) : (
-      "Add your Address and start seeing Service Requests from your city!!"
-    )
-  })
+  if(user.loginCount === 1 && addresses.length === 0){
+    swal({
+      title:"Welcome Aboard User!",
+      text: user.role === 'customer' ? (
+          "Add your first Address and start posting Service Requests"
+        ) : (
+          "Add your Address and start seeing Service Requests from your city!!"
+        )
+    })
+  }
 
   const formSubmit = (formData, clearForm) => {
     dispatch(startCreateAddress(formData, clearForm))

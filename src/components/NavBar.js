@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleIsLogged } from '../actions/isLoggedAction'
 
@@ -12,6 +12,7 @@ const NavBar = (props) => {
     const handleLogout = () => {
         localStorage.removeItem('token')
         dispatch(toggleIsLogged())
+        props.history.push('/')
     }
   return (
     <div>
@@ -34,4 +35,5 @@ const NavBar = (props) => {
   )
 }
 
-export default NavBar
+
+export default withRouter(NavBar)
