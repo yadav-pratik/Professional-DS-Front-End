@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+import { normalAlert } from '../helper-functions/sweetalert'
+
 export const startGetAddresses = () => {
     return async (dispatch) => {
         try {
@@ -9,14 +11,14 @@ export const startGetAddresses = () => {
                 }
             })
             if(data.hasOwnProperty('notice')){
-                alert(data.notice)
+                normalAlert(data.notice, 'error')
             } else if(data.hasOwnProperty('message')){
-                alert(data.message)
+                normalAlert(data.message, 'error')
             } else {
                 dispatch(setAddresses(data))
             }
         } catch (error) {
-            alert(error)
+            normalAlert(error, 'error')
         }
     }
 }
@@ -38,7 +40,7 @@ export const startDeleteAddress = (_id) => {
             })
             dispatch(removeAddress(data._id))
         } catch (error) {
-            alert(error)
+            normalAlert(error, 'error')
         }
     }
 }
@@ -59,16 +61,16 @@ export const startCreateAddress = (formData, clearForm) => {
                 }
             })
             if(data.hasOwnProperty('notice')){
-                alert(data.notice)
+                normalAlert(data.notice, 'error')
             } else if(data.hasOwnProperty('errors') || data.hasOwnProperty('message')){
-                alert(data.message)
+                normalAlert(data.message, 'error')
             } else {
-                alert("Address Added Successfully!")
+                normalAlert("Address Added Successfully!", 'success')
                 clearForm()
                 dispatch(addAddress(data))
             }
         } catch (error) {
-            alert(error)
+            normalAlert(error, 'error')
         }
     }
 }
@@ -89,16 +91,16 @@ export const startUpdateAddress = (formData, clearForm, _id) => {
                 }
             })
             if(data.hasOwnProperty('notice')){
-                alert(data.notice)
+                normalAlert(data.notice, 'error')
             } else if(data.hasOwnProperty('errors') || data.hasOwnProperty('message')){
-                alert(data.message)
+                normalAlert(data.message, 'error')
             } else {
-                alert('Address Updated Successfully!')
+                normalAlert('Address Updated Successfully!', 'success')
                 clearForm()
                 dispatch(updateAddress(data))
             }
         } catch (error) {
-            alert(error)
+            normalAlert(error, 'error')
         }
     }
 }
@@ -119,15 +121,15 @@ export const startDefaultAddress = (id) => {
                 }
             })
             if(data.hasOwnProperty('notice')){
-                alert(data.notice)
+                normalAlert(data.notice, 'error')
             } else if(data.hasOwnProperty('message')){
-                alert(data.message)
+                normalAlert(data.message, 'error')
             } else {
-                alert("Default Address Changed")
+                normalAlert("Default Address Changed", 'success')
                 dispatch(setAddresses(data))
             }
         } catch (error) {
-            alert(error)
+            normalAlert(error, 'error')
         }
     }
 }
