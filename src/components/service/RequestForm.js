@@ -20,6 +20,8 @@ const RequestForm = (props) => {
         const name = e.target.name
         if(name === 'expertise'){
             setExpertise(e.target.value)
+        } else if(name === 'description'){
+            setDescription(e.target.value)
         }
     }
 
