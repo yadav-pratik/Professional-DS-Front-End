@@ -11,12 +11,19 @@ const RequestForm = (props) => {
     const [expertise, setExpertise] = useState('')
     const [description, setDescription] = useState('')
     const [selectedAddress, setSelectedAddress] = useState('')
+    const [formErrors, setFormErrors] = useState({})
+
+    const errors = {}
 
     const addresses = useSelector((state) => {
         return state.addresses
     })
 
     const dispatch = useDispatch()
+
+    const formErrorStyle = {
+        color : 'red'
+    }
 
     const textareaStyle = {
         height : "10vh",
@@ -42,16 +49,42 @@ const RequestForm = (props) => {
         setSelectedAddress(id)
     }
 
+    const runValidation = () => {
+        //expertise validation
+        if(expertise.length === 0){
+            errors.expertise = "You must select a Category!"
+        }
+
+        //description validation
+        if(description.length === 0){
+            errors.description = "Your Description helps Professionals assess the job and qoute an approximate proposal! Please add a brief description."
+        }
+
+        //address validation
+        if(selectedAddress.length === 0){
+            errors.selectedAddress = "Please Add an Address."
+        }
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        const formData = {
-            category : expertise,
-            description,
-            address : selectedAddress
+        runValidation()
+
+        if(Object.keys(errors).length === 0){
+            setFormErrors({})
+
+            const formData = {
+                category : expertise,
+                description,
+                address : selectedAddress
+            }
+    
+            dispatch(startPostRequest(formData))
+        } else {
+            setFormErrors(errors)
         }
 
-        dispatch(startPostRequest(formData))
     }
 
     return (
@@ -65,7 +98,7 @@ const RequestForm = (props) => {
                         </option>
                     })}
                 </select>
-                <br/><br/>
+                {formErrors.expertise ? <p style={formErrorStyle}>{formErrors.expertise}</p> : <><br/><br/></>}
                 <textarea 
                     value={description}
                     onChange={handleChange}
@@ -74,9 +107,12 @@ const RequestForm = (props) => {
                     style={textareaStyle}
                 >
                 </textarea>
-                <br/><br/>
+                {formErrors.description ? <p style={formErrorStyle}>{formErrors.description}</p> : <><br/><br/></>}
                 { addresses.length === 0 ? (
-                        <h4>Hmmm... Seems like you haven't added any address yet. <Link to="/user/addresses">Add your first address!</Link></h4>
+                        <div>
+                            <h4>Hmmm... Seems like you haven't added any address yet. <Link to="/user/addresses">Add your first address!</Link></h4>
+                            {formErrors.selectedAddress && <p style={formErrorStyle}>{formErrors.selectedAddress}</p>}
+                        </div>
                     ) : (
                         <div>
                             <label>Select an Address</label>
@@ -88,7 +124,6 @@ const RequestForm = (props) => {
                                     addressChange={addressChange}
                                 />
                             })}
-
                         </div>
                     )                
                 }
@@ -96,6 +131,7 @@ const RequestForm = (props) => {
                 <input 
                     type="submit"
                     value="Post Request"
+                    disabled={Object.keys(formErrors).length !== 0}
                 />
             </form>
         </div>
