@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { useDispatch } from "react-redux"
 
 
@@ -17,6 +17,12 @@ const AddressLine = (props) => {
         addressChange, 
         selectedAddress
     } = props
+
+    useEffect(()=>{
+        if(defaultAddress === true && selectedAddress.length === 0){
+            addressChange(_id)
+        }
+    },[])
 
     const dispatch = useDispatch()
 
