@@ -1,7 +1,10 @@
 import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
+
 import { toggleIsLogged } from '../actions/isLoggedAction'
+
+import { normalAlert } from '../helper-functions/sweetalert'
 
 const NavBar = (props) => {
     const dispatch = useDispatch()
@@ -13,6 +16,7 @@ const NavBar = (props) => {
         localStorage.removeItem('token')
         dispatch(toggleIsLogged())
         props.history.push('/')
+        normalAlert('Logged Out Successfully!', 'success')
     }
   return (
     <div>
