@@ -1,19 +1,21 @@
 import axios from 'axios'
 
+import { normalAlert } from '../helper-functions/sweetalert'
+
 export const startRegisterUser = (formData, clearAndRedirect) => {
     return async () => {
         try {
             const { data } = await axios.post('http://localhost:3300/api/user/register', formData)
             if(data.hasOwnProperty('success')){
-                alert(data.success)
+                normalAlert(data.success, 'success')
                 clearAndRedirect()
             } else if(data.hasOwnProperty('errors')){
-                alert(data.message)
+                normalAlert(data.message, 'error')
             } else if(data.hasOwnProperty('notice')){
-                alert(data.notice)
+                normalAlert(data.notice, 'error')
             }
         } catch (error) {
-            alert(error)
+            normalAlert(error, 'error')
         }
     }
 }
@@ -24,7 +26,7 @@ export const startLoginUser = (formData, clearAndRedirect) => {
             const { data } = await axios.post('http://localhost:3300/api/user/login', formData)
             if(data.hasOwnProperty('success')){
                 localStorage.setItem('token', data.token)
-                alert(data.success)
+                normalAlert(data.success, 'success')
                 try {
                     const response = await axios.get('http://localhost:3300/api/user/login-count', {
                         headers : {
@@ -39,16 +41,16 @@ export const startLoginUser = (formData, clearAndRedirect) => {
                             clearAndRedirect('services')
                         }
                     } else if(result.hasOwnProperty('message')){
-                        alert(result.message)
+                        normalAlert(result.message, 'error')
                     }
                 } catch (error) {
-                    alert(error)
+                    normalAlert(error, 'error')
                 }
             } else if(data.hasOwnProperty('notice')){
-                alert(data.notice)
+                normalAlert(data.notice, 'error')
             }
         } catch (error) {
-            alert(error)
+            normalAlert(error, 'error')
         }
     }
 }
@@ -62,12 +64,12 @@ export const startGetUser = () => {
                 }
             })
             if(data.hasOwnProperty('message')){
-                alert(data.message)
+                normalAlert(data.message, 'error')
             } else {
                 dispatch(setUser(data))
             }
         } catch (error) {
-            alert(error)
+            normalAlert(error, 'error')
         }
     }
 }
