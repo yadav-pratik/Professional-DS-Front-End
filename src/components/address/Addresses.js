@@ -12,15 +12,15 @@ const Addresses = (props) => {
 
   const dispatch = useDispatch()
   useEffect(()=>{
-    dispatch(startGetUser())
     dispatch(startGetAddresses())
+    dispatch(startGetUser())
   },[dispatch])
 
   const { addresses, user } = useSelector((state)=> {
     return state
   })
 
-  if(user.loginCount === 1 && addresses.length === 0){
+  if(user.hasOwnProperty('loginCount') && user.loginCount === 1 && addresses.length === 0){
     swal({
       title:"Welcome Aboard User!",
       text: user.role === 'customer' ? (
@@ -30,7 +30,7 @@ const Addresses = (props) => {
         )
     })
   }
-
+  
   const formSubmit = (formData, clearForm) => {
     dispatch(startCreateAddress(formData, clearForm))
   }

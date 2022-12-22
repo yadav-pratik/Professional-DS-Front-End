@@ -19,7 +19,7 @@ const AddressLine = (props) => {
     } = props
 
     useEffect(()=>{
-        if(defaultAddress === true && selectedAddress.length === 0){
+        if(defaultAddress === true && typeof selectedAddress == 'string' && selectedAddress.length === 0){
             addressChange(_id)
         }
     },[])
