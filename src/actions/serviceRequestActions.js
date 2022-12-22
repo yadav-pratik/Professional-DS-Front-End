@@ -1,9 +1,8 @@
 import axios from 'axios'
 
-import { normalAlert } from '../helper-functions.js/sweetalert'
+import { normalAlert } from '../helper-functions/sweetalert'
 
-export const startPostRequest = (formData) => {
-    console.log(formData)
+export const startPostRequest = (formData, clearAndRedirect) => {
     return async (dispatch) => {
         try {
             const { data } = await axios.post('http://localhost:3300/api/service-request/create', formData, {
@@ -17,6 +16,7 @@ export const startPostRequest = (formData) => {
                 normalAlert(data.message, 'error')
             } else {
                 normalAlert('Request Posted Successfully!', 'success', 'Now Professionals can make Proposals to your request and you can choose one that best suits you!!')
+                clearAndRedirect()
             }
         } catch (error) {
             normalAlert(error, 'error')

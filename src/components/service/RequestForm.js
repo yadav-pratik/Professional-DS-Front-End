@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 import AddressLine from "../address/AddressLine"
 
@@ -79,8 +79,15 @@ const RequestForm = (props) => {
                 description,
                 address : selectedAddress
             }
+
+            const clearAndRedirect = () => {
+                setExpertise('')
+                setDescription('')
+                setSelectedAddress('')
+                props.history.push('/user/services')
+            }
     
-            dispatch(startPostRequest(formData))
+            dispatch(startPostRequest(formData, clearAndRedirect))
         } else {
             setFormErrors(errors)
         }
@@ -137,4 +144,4 @@ const RequestForm = (props) => {
     )
 }
 
-export default RequestForm
+export default withRouter(RequestForm)
