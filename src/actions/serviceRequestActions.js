@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+import { normalAlert } from '../helper-functions.js/sweetalert'
+
 export const startPostRequest = (formData) => {
     console.log(formData)
     return async (dispatch) => {
@@ -9,9 +11,15 @@ export const startPostRequest = (formData) => {
                     authorization : localStorage.getItem('token')
                 }
             }) 
-            console.log(data)
+            if(data.hasOwnProperty('notice')){
+                normalAlert(data.notice, 'error')
+            } else  if(data.hasOwnProperty('errors') || data.hasOwnProperty('message')){
+                normalAlert(data.message, 'error')
+            } else {
+                normalAlert('Request Posted Successfully!', 'success', 'Now Professionals can make Proposals to your request and you can choose one that best suits you!!')
+            }
         } catch (error) {
-            alert(error)
+            normalAlert(error, 'error')
         }
     }
 }
