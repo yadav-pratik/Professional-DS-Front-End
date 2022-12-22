@@ -1,9 +1,11 @@
 import React, { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
+import { Link } from 'react-router-dom'
 
 import AddressLine from "../address/AddressLine"
 
 import { startPostRequest } from "../../actions/serviceRequestActions"
+import AddressForm from "../address/AddressForm"
 
 const RequestForm = (props) => {
     const [expertise, setExpertise] = useState('')
@@ -73,15 +75,23 @@ const RequestForm = (props) => {
                 >
                 </textarea>
                 <br/><br/>
-                <label>Select an Address</label>
-                {addresses.map(address => {
-                    return <AddressLine 
-                        key={address._id}
-                        {...address}
-                        selectedAddress={selectedAddress}
-                        addressChange={addressChange}
-                    />
-                })}
+                { addresses.length === 0 ? (
+                        <h4>Hmmm... Seems like you haven't added any address yet. <Link to="/user/addresses">Add your first address!</Link></h4>
+                    ) : (
+                        <div>
+                            <label>Select an Address</label>
+                            {addresses.map(address => {
+                                return <AddressLine 
+                                    key={address._id}
+                                    {...address}
+                                    selectedAddress={selectedAddress}
+                                    addressChange={addressChange}
+                                />
+                            })}
+
+                        </div>
+                    )                
+                }
                 <br/>
                 <input 
                     type="submit"
