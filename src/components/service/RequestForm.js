@@ -1,6 +1,9 @@
 import React, { useState } from "react"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
+
 import AddressLine from "../address/AddressLine"
+
+import { startPostRequest } from "../../actions/serviceRequestActions"
 
 const RequestForm = (props) => {
     const [expertise, setExpertise] = useState('')
@@ -10,6 +13,8 @@ const RequestForm = (props) => {
     const addresses = useSelector((state) => {
         return state.addresses
     })
+
+    const dispatch = useDispatch()
 
     const textareaStyle = {
         height : "10vh",
@@ -44,7 +49,7 @@ const RequestForm = (props) => {
             address : selectedAddress
         }
 
-        console.log(formData)
+        dispatch(startPostRequest(formData))
     }
 
     return (
