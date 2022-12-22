@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import { Link, Route } from "react-router-dom"
-import { useSelector, useDispatch } from "react-redux"
+import { useDispatch } from "react-redux"
 
 import AddRequest from "./AddRequest"
 import AllRequests from "./AllRequests"
@@ -10,11 +10,8 @@ import { startGetUser } from "../../actions/userActions"
 
 const Services = (props) => {
 
-    const { user, addresses } = useSelector((state) => {
-        return state
-    })
-
     const dispatch = useDispatch()
+    
     useEffect(()=>{
         dispatch(startGetUser())
         dispatch(startGetAddresses())

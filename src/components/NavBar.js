@@ -6,8 +6,8 @@ import { toggleIsLogged } from '../actions/isLoggedAction'
 const NavBar = (props) => {
     const dispatch = useDispatch()
 
-    const { isLogged } = useSelector((state) => {
-        return state
+    const isLogged = useSelector((state) => {
+        return state.isLogged
     })
     const handleLogout = () => {
         localStorage.removeItem('token')

@@ -7,8 +7,8 @@ const RequestForm = (props) => {
     const [description, setDescription] = useState('')
     const [selectedAddress, setSelectedAddress] = useState('')
 
-    const { addresses, user } = useSelector((state) => {
-        return state
+    const addresses = useSelector((state) => {
+        return state.addresses
     })
 
     const textareaStyle = {
@@ -18,7 +18,6 @@ const RequestForm = (props) => {
         minHeight : '60px',
         maxWidth : '500px',
         minWidth : '250px'
-
     }
 
     const expertiseType = ['plumber','electrician','carpenter','painter']
@@ -36,9 +35,21 @@ const RequestForm = (props) => {
         setSelectedAddress(id)
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault()
+
+        const formData = {
+            category : expertise,
+            description,
+            address : selectedAddress
+        }
+
+        console.log(formData)
+    }
+
     return (
         <div>
-            <form>
+            <form onSubmit = {handleSubmit}>
                 <select value={expertise} onChange={handleChange} name="expertise">
                     <option value="">What kind of Professional you need?</option>
                     { expertiseType.map((exp, i) => {
