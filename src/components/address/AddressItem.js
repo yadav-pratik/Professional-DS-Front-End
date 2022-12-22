@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
 import { useDispatch } from 'react-redux'
 
-import { startDeleteAddress, startUpdateAddress } from '../../actions/addressesAction'
+import { startDeleteAddress, startUpdateAddress, startDefaultAddress } from '../../actions/addressesAction'
+
 
 import AddressForm from './AddressForm'
 import AddressLine from './AddressLine'
@@ -15,6 +16,10 @@ const AddressItem = (props) => {
 
     const handleDelete = () => {
       dispatch(startDeleteAddress(_id))
+    }
+
+    const handleDefaultChange = () => {
+      dispatch(startDefaultAddress(_id))
     }
 
     const handleToggle = () => {
@@ -39,6 +44,7 @@ const AddressItem = (props) => {
             city={city}
             state={state}
             defaultAddress={defaultAddress}
+            handleDefaultChange={handleDefaultChange}
           />
           <button onClick={handleToggle}>Edit</button>
           <button onClick={handleDelete}>Delete</button>

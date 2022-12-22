@@ -1,23 +1,34 @@
 import React from "react"
 import { useDispatch } from "react-redux"
 
-import { startDefaultAddress } from "../../actions/addressesAction"
 
 const AddressLine = (props) => {
-    const {_id, doorNumber, landmark, area, street, pincode, city, state, defaultAddress} = props
+    const {
+        _id, 
+        doorNumber, 
+        landmark, 
+        area, 
+        street, 
+        pincode, 
+        city, 
+        state, 
+        defaultAddress, 
+        handleDefaultChange, 
+        addressChange, 
+        selectedAddress
+    } = props
 
     const dispatch = useDispatch()
 
-    const handleDefaultChange = () => {
-        dispatch(startDefaultAddress(_id))
-      }
+    const handleDefault = handleDefaultChange ? handleDefaultChange : () => {addressChange(_id)}
 
     return (
         <div>
             <input 
                 type="radio" 
-                checked={defaultAddress} 
-                onChange={handleDefaultChange}
+                name="address"
+                checked={selectedAddress ? _id === selectedAddress : defaultAddress} 
+                onChange={handleDefault}
             />
             <span>
                 {doorNumber + ', '}

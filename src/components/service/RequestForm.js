@@ -1,8 +1,15 @@
 import React, { useState } from "react"
+import { useSelector } from "react-redux"
+import AddressLine from "../address/AddressLine"
 
 const RequestForm = (props) => {
     const [expertise, setExpertise] = useState('')
     const [description, setDescription] = useState('')
+    const [selectedAddress, setSelectedAddress] = useState('')
+
+    const { addresses, user } = useSelector((state) => {
+        return state
+    })
 
     const textareaStyle = {
         height : "10vh",
@@ -25,6 +32,10 @@ const RequestForm = (props) => {
         }
     }
 
+    const addressChange = (id) => {
+        setSelectedAddress(id)
+    }
+
     return (
         <div>
             <form>
@@ -45,6 +56,21 @@ const RequestForm = (props) => {
                     style={textareaStyle}
                 >
                 </textarea>
+                <br/><br/>
+                <label>Select an Address</label>
+                {addresses.map(address => {
+                    return <AddressLine 
+                        key={address._id}
+                        {...address}
+                        selectedAddress={selectedAddress}
+                        addressChange={addressChange}
+                    />
+                })}
+                <br/>
+                <input 
+                    type="submit"
+                    value="Post Request"
+                />
             </form>
         </div>
     )
