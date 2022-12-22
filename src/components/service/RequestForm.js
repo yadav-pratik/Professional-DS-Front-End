@@ -131,7 +131,6 @@ const RequestForm = (props) => {
                 <input 
                     type="submit"
                     value="Post Request"
-                    disabled={Object.keys(formErrors).length !== 0}
                 />
             </form>
         </div>
