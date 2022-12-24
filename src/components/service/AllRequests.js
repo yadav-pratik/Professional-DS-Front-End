@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react"
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { startGetRequest } from "../../actions/serviceRequestActions"
+import RequestList from "./RequestList"
 
 const AllRequests = (props) => {
     const [status, setStatus] = useState('all')
@@ -9,6 +10,10 @@ const AllRequests = (props) => {
     const statusType = ['added', 'alloted', 'completed']
 
     const dispatch = useDispatch()
+
+    const serviceRequests = useSelector((state) => {
+        return state.serviceRequests
+    })
 
     useEffect(()=>{
         dispatch(startGetRequest(status))
@@ -19,7 +24,7 @@ const AllRequests = (props) => {
     }
     return (
         <div>
-            <h3>Your Service Requests</h3>
+            <h3>Your Service Requests - {serviceRequests.length}</h3>
             <form>
                 <label>Filter by Status</label>
                 <select
@@ -37,6 +42,7 @@ const AllRequests = (props) => {
                     })}
                 </select>
             </form>
+            <RequestList />
         </div>
     )
 }
