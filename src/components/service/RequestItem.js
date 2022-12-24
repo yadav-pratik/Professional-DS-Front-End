@@ -2,7 +2,8 @@ import React, { useState } from "react"
 import { useDispatch } from "react-redux"
 import swal from 'sweetalert'
 
-import { startDeleteRequest } from "../../actions/serviceRequestActions"
+import { startDeleteRequest, startUpdateRequest } from "../../actions/serviceRequestActions"
+
 import RequestForm from "./RequestForm"
 
 const RequestItem = (props) => {
@@ -41,6 +42,10 @@ const RequestItem = (props) => {
         setToggle(!toggle)
     }
 
+    const formSubmit = (formData, clearAndToggle, _id) => {
+        dispatch(startUpdateRequest(formData, clearAndToggle, _id))
+    } 
+
     return (
         <div>
             { !toggle ? (
@@ -63,8 +68,11 @@ const RequestItem = (props) => {
                     <div>
                         <RequestForm
                             handleToggle={handleToggle}
+                            _id={_id}
+                            category={category}
                             description={description}
                             address={address}
+                            formSubmit={formSubmit}
                         />
                         <button onClick={handleToggle}>Cancel</button>
                     </div>

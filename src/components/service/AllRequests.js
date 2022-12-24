@@ -17,7 +17,7 @@ const AllRequests = (props) => {
 
     useEffect(()=>{
         dispatch(startGetRequest(status))
-    }, [status])
+    }, [status, dispatch])
 
     const handleStatusChange = (e) => {
         setStatus(e.target.value)

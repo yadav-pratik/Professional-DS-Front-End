@@ -1,13 +1,13 @@
 import React, { useState } from "react"
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 import { Link, withRouter } from 'react-router-dom'
 
 import AddressLine from "../address/AddressLine"
 
 const RequestForm = (props) => {
-    const { _id, description : descr, address, handleToggle, formSubmit } = props
+    const { _id, category, description : descr, address, handleToggle, formSubmit } = props
 
-    const [expertise, setExpertise] = useState('')
+    const [expertise, setExpertise] = useState(category ? category : '')
     const [description, setDescription] = useState(descr ? descr : '')
     const [selectedAddress, setSelectedAddress] = useState(address ? address : '')
     const [formErrors, setFormErrors] = useState({})
@@ -17,8 +17,6 @@ const RequestForm = (props) => {
     const addresses = useSelector((state) => {
         return state.addresses
     })
-
-    const dispatch = useDispatch()
 
     const formErrorStyle = {
         color : 'red'
@@ -85,10 +83,14 @@ const RequestForm = (props) => {
                 setExpertise('')
                 setDescription('')
                 setSelectedAddress('')
-                props.history.push('/user/services')
+                if(handleToggle){
+                    handleToggle()
+                } else {
+                    props.history.push('/user/services')
+                }
             }
     
-            formSubmit(formData, clearAndRedirect)
+            formSubmit(formData, clearAndRedirect, _id)
         } else {
             setFormErrors(errors)
         }

@@ -10,6 +10,15 @@ const serviceRequestReducer = (state = initialRequestsValue, action) => {
                 return req._id !== action.payload
             })
         }
+        case 'UPDATE_REQUEST' : {
+            return state.map(req => {
+                if(req._id === action.payload._id){
+                    return {...req, ...action.payload}
+                } else {
+                    return {...req}
+                }
+            })
+        }
         default : {
             return [...state]
         }
