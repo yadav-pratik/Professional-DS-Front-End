@@ -3,7 +3,7 @@ import axios from 'axios'
 import { normalAlert } from '../helper-functions/sweetalert'
 
 export const startPostRequest = (formData, clearAndRedirect) => {
-    return async (dispatch) => {
+    return async () => {
         try {
             const { data } = await axios.post('http://localhost:3300/api/service-request/create', formData, {
                 headers : {
@@ -21,5 +21,27 @@ export const startPostRequest = (formData, clearAndRedirect) => {
         } catch (error) {
             normalAlert(error, 'error')
         }
+    }
+}
+
+export const startGetRequest = (status) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.get(`http://localhost:3300/api/service-request/customer-list/?status=${status}`, {
+                headers : {
+                    authorization : localStorage.getItem('token')
+                }
+            })
+            dispatch(setRequests(data))
+        } catch (error) {
+            normalAlert(error, 'error')
+        }
+    }
+}
+
+const setRequests = (data) => {
+    return {
+        type : 'SET_REQUESTS',
+        payload : data
     }
 }

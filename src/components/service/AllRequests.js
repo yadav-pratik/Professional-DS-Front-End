@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react"
+import { useDispatch } from 'react-redux'
+
+import { startGetRequest } from "../../actions/serviceRequestActions"
 
 const AllRequests = (props) => {
     const [status, setStatus] = useState('all')
 
     const statusType = ['added', 'alloted', 'completed']
 
+    const dispatch = useDispatch()
+
     useEffect(()=>{
-        
+        dispatch(startGetRequest(status))
     }, [status])
 
     const handleStatusChange = (e) => {
