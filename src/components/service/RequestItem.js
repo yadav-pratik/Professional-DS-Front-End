@@ -54,6 +54,10 @@ const RequestItem = (props) => {
                         <p>Description - {description}</p>
                         <span>Added on - {createdAt.slice(0,10)}</span>
                         <span>Status - {status.charAt(0).toUpperCase() + status.slice(1)}</span>
+                        {address && 
+                            <p>Address - {`${address.doorNumber} ${address.landmark} ${address.area} ${address.street} ${address.city} ${address.state} - ${address.pincode}`}
+                            </p>
+                        }
                         {status !== 'added' && <b>{status === 'completed' ? 'Final' : 'Expected'} Bill Amount - Rs. {billAmount}</b>}
                         {
                             status === 'added' && 
@@ -71,7 +75,7 @@ const RequestItem = (props) => {
                             _id={_id}
                             category={category}
                             description={description}
-                            address={address}
+                            address={address._id}
                             formSubmit={formSubmit}
                         />
                         <button onClick={handleToggle}>Cancel</button>
