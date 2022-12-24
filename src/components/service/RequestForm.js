@@ -8,9 +8,11 @@ import { startPostRequest } from "../../actions/serviceRequestActions"
 import AddressForm from "../address/AddressForm"
 
 const RequestForm = (props) => {
+    const { _id, description : descr, address, handleToggle } = props
+
     const [expertise, setExpertise] = useState('')
-    const [description, setDescription] = useState('')
-    const [selectedAddress, setSelectedAddress] = useState('')
+    const [description, setDescription] = useState(descr ? descr : '')
+    const [selectedAddress, setSelectedAddress] = useState(address ? address : '')
     const [formErrors, setFormErrors] = useState({})
 
     const errors = {}
@@ -51,8 +53,10 @@ const RequestForm = (props) => {
 
     const runValidation = () => {
         //expertise validation
-        if(expertise.length === 0){
-            errors.expertise = "You must select a Category!"
+        if(!handleToggle){
+            if(expertise.length === 0){
+                errors.expertise = "You must select a Category!"
+            }
         }
 
         //description validation
@@ -97,15 +101,19 @@ const RequestForm = (props) => {
     return (
         <div>
             <form onSubmit = {handleSubmit}>
-                <select value={expertise} onChange={handleChange} name="expertise">
+                {!handleToggle && 
+                <div>
+                    <select value={expertise} onChange={handleChange} name="expertise">
                     <option value="">What kind of Professional you need?</option>
                     { expertiseType.map((exp, i) => {
                         return <option key={i} value={exp}>
                             {exp.charAt(0).toUpperCase() + exp.slice(1)}
                         </option>
                     })}
-                </select>
-                {formErrors.expertise ? <p style={formErrorStyle}>{formErrors.expertise}</p> : <><br/><br/></>}
+                    </select>
+                    {formErrors.expertise ? <p style={formErrorStyle}>{formErrors.expertise}</p> : <><br/><br/></>}
+                </div>
+                }
                 <textarea 
                     value={description}
                     onChange={handleChange}
@@ -137,7 +145,7 @@ const RequestForm = (props) => {
                 <br/>
                 <input 
                     type="submit"
-                    value="Post Request"
+                    value={handleToggle ? "Update Request" : "Post Request"}
                 />
             </form>
         </div>
