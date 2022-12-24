@@ -4,11 +4,8 @@ import { Link, withRouter } from 'react-router-dom'
 
 import AddressLine from "../address/AddressLine"
 
-import { startPostRequest } from "../../actions/serviceRequestActions"
-import AddressForm from "../address/AddressForm"
-
 const RequestForm = (props) => {
-    const { _id, description : descr, address, handleToggle } = props
+    const { _id, description : descr, address, handleToggle, formSubmit } = props
 
     const [expertise, setExpertise] = useState('')
     const [description, setDescription] = useState(descr ? descr : '')
@@ -91,7 +88,7 @@ const RequestForm = (props) => {
                 props.history.push('/user/services')
             }
     
-            dispatch(startPostRequest(formData, clearAndRedirect))
+            formSubmit(formData, clearAndRedirect)
         } else {
             setFormErrors(errors)
         }
