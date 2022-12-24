@@ -1,6 +1,8 @@
 import React from "react"
 import { useDispatch } from "react-redux"
 
+import { startDeleteRequest } from "../../actions/serviceRequestActions"
+
 const RequestItem = (props) => {
     const {
         _id, 
@@ -16,7 +18,7 @@ const RequestItem = (props) => {
     const handleDelete = () => {
         dispatch(startDeleteRequest(_id)) 
     }
-    
+
     return (
         <div>
             <b>Category - {category.charAt(0).toUpperCase() + category.slice(1)}</b>

@@ -45,3 +45,25 @@ const setRequests = (data) => {
         payload : data
     }
 }
+
+export const startDeleteRequest = (id) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.delete(`http://localhost:3300/api/service-request/delete/${id}`, {
+                headers : {
+                    authorization : localStorage.getItem('token')
+                }
+            })
+            dispatch(deleteRequest(data._id))
+        } catch (error) {
+            normalAlert(error, 'error')
+        }
+    }
+}
+
+const deleteRequest = (id) => {
+    return {
+        type : 'DELETE_REQUEST',
+        payload : id
+    }
+}
