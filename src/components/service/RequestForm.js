@@ -100,18 +100,24 @@ const RequestForm = (props) => {
     return (
         <div>
             <form onSubmit = {handleSubmit}>
-                {!handleToggle && 
-                <div>
-                    <select value={expertise} onChange={handleChange} name="expertise">
-                    <option value="">What kind of Professional you need?</option>
-                    { expertiseType.map((exp, i) => {
-                        return <option key={i} value={exp}>
-                            {exp.charAt(0).toUpperCase() + exp.slice(1)}
-                        </option>
-                    })}
-                    </select>
-                    {formErrors.expertise ? <p style={formErrorStyle}>{formErrors.expertise}</p> : <><br/><br/></>}
-                </div>
+                {!handleToggle ? (
+                        <div>
+                        <select value={expertise} onChange={handleChange} name="expertise">
+                        <option value="">What kind of Professional you need?</option>
+                        { expertiseType.map((exp, i) => {
+                            return <option key={i} value={exp}>
+                                {exp.charAt(0).toUpperCase() + exp.slice(1)}
+                            </option>
+                        })}
+                        </select>
+                        {formErrors.expertise ? <p style={formErrorStyle}>{formErrors.expertise}</p> : <><br/><br/></>}
+                    </div>
+                    ) : (
+                        <div>
+                            <b>Category - {category.charAt(0).toUpperCase() + category.slice(1)}</b>
+                            <br/><br/>
+                        </div>
+                    ) 
                 }
                 <textarea 
                     value={description}
