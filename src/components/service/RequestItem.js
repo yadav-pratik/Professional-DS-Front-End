@@ -40,7 +40,7 @@ const RequestItem = (props) => {
             <p>Description - {description}</p>
             <span>Added on - {createdAt.slice(0,10)}</span>
             <span>Status - {status.charAt(0).toUpperCase() + status.slice(1)}</span>
-            {Boolean(billAmount) && <span>Total Bill Amount - Rs. {billAmount}</span>}
+            {status !== 'added' && <b>{status === 'completed' ? 'Final' : 'Expected'} Bill Amount - Rs. {billAmount}</b>}
             {
                 status === 'added' && 
                 <div>
