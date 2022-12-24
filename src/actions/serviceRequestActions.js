@@ -54,7 +54,14 @@ export const startDeleteRequest = (id) => {
                     authorization : localStorage.getItem('token')
                 }
             })
-            dispatch(deleteRequest(data._id))
+            if(data.hasOwnProperty('notice')){
+                normalAlert(data.notice, 'error')
+            } else if(data.hasOwnProperty('message')){
+                normalAlert(data.message, 'error')
+            } else {
+                normalAlert('Request Deleted Successfully!', 'success')
+                dispatch(deleteRequest(data._id))
+            }
         } catch (error) {
             normalAlert(error, 'error')
         }

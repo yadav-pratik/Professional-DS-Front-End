@@ -1,5 +1,6 @@
 import React from "react"
 import { useDispatch } from "react-redux"
+import swal from 'sweetalert'
 
 import { startDeleteRequest } from "../../actions/serviceRequestActions"
 
@@ -16,7 +17,21 @@ const RequestItem = (props) => {
     const dispatch = useDispatch()
 
     const handleDelete = () => {
-        dispatch(startDeleteRequest(_id)) 
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this Service Request!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                dispatch(startDeleteRequest(_id))
+            } else {
+                swal(`Your Service Request is safe!`)
+            }
+        })
+         
     }
 
     return (

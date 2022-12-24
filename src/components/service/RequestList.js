@@ -8,12 +8,22 @@ const RequestList = (props) => {
     })
     return (
         <div>
-            {serviceRequests.map(request => {
-                return <RequestItem 
-                    key={request._id}
-                    {...request}
-                />
-            })}
+            { serviceRequests.length === 0 ? (
+                    <div>
+                        <h4>Oops! There is nothing to show here.</h4>
+                        <p>Either reload the page or select another option.</p>
+                    </div>
+                ) : (
+                    <div>
+                        {serviceRequests.map(request => {
+                            return <RequestItem 
+                                key={request._id}
+                                {...request}
+                            />
+                        })}
+                    </div>
+                )
+            }
         </div>
     )
 }
