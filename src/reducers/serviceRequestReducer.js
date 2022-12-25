@@ -3,7 +3,9 @@ const initialRequestsValue = []
 const serviceRequestReducer = (state = initialRequestsValue, action) => {
     switch(action.type) {
         case 'SET_REQUESTS' : {
-            return [...action.payload]
+            return action.payload.map(req => {
+                return {...req, proposalToggle : false}
+            })
         }
         case 'DELETE_REQUEST' : {
             return state.filter(req => {
@@ -16,6 +18,15 @@ const serviceRequestReducer = (state = initialRequestsValue, action) => {
                     return {...req, ...action.payload}
                 } else {
                     return {...req}
+                }
+            })
+        }
+        case 'TOGGLE_PROPOSAL' : {
+            return state.map(req => {
+                if(req._id === action.payload){
+                    return {...req, proposalToggle : true}
+                } else {
+                    return {...req, proposalToggle : false}
                 }
             })
         }

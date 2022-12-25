@@ -2,14 +2,14 @@ import React, { useState } from "react"
 import { useDispatch } from "react-redux"
 import swal from 'sweetalert'
 
-import { startDeleteRequest, startUpdateRequest } from "../../actions/serviceRequestActions"
+import { startDeleteRequest, startUpdateRequest, toggleProposal } from "../../actions/serviceRequestActions"
 
 import RequestForm from "./RequestForm"
 import ProposalList from "../proposals/ProposalList"
 
 const RequestItem = (props) => {
     const [toggle, setToggle] = useState(false)
-    const [proposalToggle, setProposalToggle] = useState(false)
+    // const [proposalToggle, setProposalToggle] = useState(false)
 
     const {
         _id, 
@@ -18,7 +18,8 @@ const RequestItem = (props) => {
         createdAt, 
         status, 
         billAmount,
-        address
+        address,
+        proposalToggle
     } = props
 
     const dispatch = useDispatch()
@@ -45,7 +46,7 @@ const RequestItem = (props) => {
     }
 
     const handleProposalToggle = () => {
-        setProposalToggle(!proposalToggle)
+        dispatch(toggleProposal(_id))
     }
 
     const formSubmit = (formData, clearAndToggle, _id) => {

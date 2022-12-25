@@ -104,3 +104,10 @@ const updateRequest = (data) => {
         payload : data
     }
 }
+
+export const toggleProposal = (id) => {
+    return {
+        type : 'TOGGLE_PROPOSAL',
+        payload : id
+    }
+}
