@@ -5,9 +5,11 @@ import swal from 'sweetalert'
 import { startDeleteRequest, startUpdateRequest } from "../../actions/serviceRequestActions"
 
 import RequestForm from "./RequestForm"
+import ProposalList from "../proposals/ProposalList"
 
 const RequestItem = (props) => {
     const [toggle, setToggle] = useState(false)
+    const [proposalToggle, setProposalToggle] = useState(false)
 
     const {
         _id, 
@@ -42,6 +44,10 @@ const RequestItem = (props) => {
         setToggle(!toggle)
     }
 
+    const handleProposalToggle = () => {
+        setProposalToggle(!proposalToggle)
+    }
+
     const formSubmit = (formData, clearAndToggle, _id) => {
         dispatch(startUpdateRequest(formData, clearAndToggle, _id))
     } 
@@ -64,7 +70,9 @@ const RequestItem = (props) => {
                             <div>
                                 <button onClick={handleToggle}>Edit</button>
                                 <button onClick={handleDelete}>Delete</button>
-                                <button>See Propasals</button>
+                                <button onClick={handleProposalToggle}>
+                                    {proposalToggle ? 'Hide ' : 'See '} Propasals
+                                </button>
                             </div>
                         }
                     </div>
@@ -81,6 +89,12 @@ const RequestItem = (props) => {
                         <button onClick={handleToggle}>Cancel</button>
                     </div>
                 )
+            }
+            {proposalToggle && 
+                <div>
+                    <ProposalList
+                    />
+                </div>
             }
         </div>
         
