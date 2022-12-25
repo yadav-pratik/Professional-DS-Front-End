@@ -93,6 +93,7 @@ const RequestItem = (props) => {
             {proposalToggle && 
                 <div>
                     <ProposalList
+                        _id={_id}
                     />
                 </div>
             }
